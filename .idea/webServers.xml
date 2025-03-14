@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5b85f980-4aa4-44a2-aaae-dc3c6628bb7d" name="pi@10.149.175.155:22 password">
+        <fileTransfer rootFolder="/tmp/pycharm_project_100" accessType="SFTP" host="10.149.175.155" port="22" sshConfigId="74ea66b8-1d27-4df6-a78b-4d43219aabc4" sshConfig="pi@10.149.175.155:22 password" />
+      </webServer>
+    </option>
+  </component>
+</project>
