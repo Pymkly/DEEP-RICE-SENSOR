@@ -1,6 +1,14 @@
+import logging
 from datetime import datetime, timedelta
 import json
 import os
+
+def extract_sensor_params(_server_info):
+    _type = _server_info['type']
+    _interval = _server_info['interval']
+    _path = os.path.join("queue", _type)
+    return _path, _interval
+
 class BaseSensor:
     def __init__(self, _path, _interval):
         self._path = _path
@@ -19,20 +27,19 @@ class BaseSensor:
         # }
 
     def read(self):
-        print(self._path)
         files = sorted(os.listdir(self._path))
-        print(files)
+        logging.info(files)
         _responses = []
         _file_grp = []
         for file in files:
             _filepath = os.path.join(self._path, file)
             if os.path.isdir(_filepath):
-                print(_filepath)
+                logging.info(_filepath)
                 _resp_temp, _file_grp_temp = self.read_one_poto(_filepath)
                 _responses.extend(_resp_temp)
                 _file_grp.extend(_file_grp_temp)
-        print(_responses)
-        print(_file_grp)
+        logging.info(_responses)
+        logging.info(_file_grp)
         return _responses, _file_grp
 
     def read_one_poto(self, _path):

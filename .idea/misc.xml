@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Remote Python 3.9.2 (sftp://pi@10.149.175.155:22/home/pi/.virtualenvs/DEEP-RICE-SENSOR/bin/python)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.9.2 (sftp://pi@10.167.183.155:22/home/pi/.virtualenvs/DEEP-RICE-SENSOR/bin/python)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.9.2 (sftp://pi@192.168.1.110:22/home/pi/.virtualenvs/DEEP-RICE-SENSOR/bin/python)" project-jdk-type="Python SDK" />
 </project>

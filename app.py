@@ -1,28 +1,21 @@
-# import logging
-#
-# from sensorhandler import SensorHandler
-# logging.basicConfig(
-#     filename='sensor.log',
-#     level=logging.INFO,
-#     format='%(asctime)s - %(levelname)s - %(message)s'
-# )
-# sensorhandler = SensorHandler()
-#
-# sensorhandler.start()
 import uvicorn
 from fastapi import FastAPI, Request
-# from fastapi.responses import JSONResponse
-# from datetime import datetime
 import os
 from api.routes.incoming_manager import router as incoming_manager_router
-# import json
+from api.routes.sender import router as sender_router
+import logging
 
-
+logging.basicConfig(
+    filename='sensor.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 app = FastAPI()
 QUEUE_DIR = "queue"
 os.makedirs(QUEUE_DIR, exist_ok=True)
 
 app.include_router(incoming_manager_router, prefix="/incoming")
+app.include_router(sender_router, prefix="/api")
 
 @app.get("/")
 async def ping():

@@ -1,13 +1,14 @@
 [
     {
         "type": "DHT22",
-        "pin": 4,
         "interval": 600
     },
     {
         "type": "NPK",
-        "port" : "/dev/serial0",
-        "bauderate" : 9600,
+        "interval": 600
+    },
+    {
+        "type": "WATER_LEVEL",
         "interval": 600
     }
 ]

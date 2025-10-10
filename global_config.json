@@ -1,6 +1,8 @@
 {
   "sensor_collect_interval" : 5,
-  "server_url" : "http://100.91.187.102:8000/rasp",
+  "server_url" : "http://100.66.150.54:8000",
+  "ping_url" : "/ping",
+  "rasp_url" : "/rasp",
   "sensor_data_url": "/sensor-data",
   "ref" : "POTO#0001",
   "mac_unknown": [],

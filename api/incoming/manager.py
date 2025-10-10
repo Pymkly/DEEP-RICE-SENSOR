@@ -1,3 +1,4 @@
+import logging
 import os
 import json
 from datetime import datetime
@@ -10,7 +11,8 @@ class IncomingManager:
         # Définitions des capteurs et leurs clés
         self.sensor_fields = {
             "DHT22": {"humidity", "temperature"},
-            "NPK": {"N", "P", "K"}
+            "NPK": {"N", "P", "K"},
+            "WATER_LEVEL": {"level"},
         }
 
     def parse_and_save(self, ref: str, raw_data: dict):
@@ -34,11 +36,11 @@ class IncomingManager:
             try:
                 with open(filepath, "w") as f:
                     json.dump(payload, f)
-                print(f"Données enregistrées pour {sensor_type} dans {filepath}")
+                # logging.info(f"Données enregistrées pour {sensor_type} dans {filepath}")
             except Exception as e:
-                print(f"Erreur en sauvegardant {sensor_type}: {e}")
+                logging.error(f"Erreur en sauvegardant {sensor_type}: {e}")
 
-    def prepare_data(self, raw_data):
+    def  prepare_data(self, raw_data):
         matched_data = {}
 
         # On sépare les données en fonction des capteurs connus

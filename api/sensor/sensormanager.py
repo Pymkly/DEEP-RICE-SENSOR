@@ -1,14 +1,33 @@
 from api.sensor.npk.soilsensor import SoilSensor, init_soil_sensor_by_info
+from api.sensor.water_level.water_level_sensor import WaterLevelSensor, init_water_level
 from api.sensor.wind.DHT22 import DHT22Sensor, init_dht22_by_info
 import time
 import logging
 import json
+import requests
 
+from api.utils.config import get_ping_url
 
 SENSOR_CLASSES = {
     "DHT22": [DHT22Sensor, init_dht22_by_info],
-    "NPK": [SoilSensor, init_soil_sensor_by_info]
+    "NPK": [SoilSensor, init_soil_sensor_by_info],
+    "WATER_LEVEL": [WaterLevelSensor, init_water_level],
 }
+
+
+def ping():
+    try:
+        print("start ping")
+        logging.info("start ping")
+        response = requests.get(get_ping_url())
+        print("end ping")
+        logging.info("end ping")
+        return response.status_code == 200
+    except requests.exceptions.RequestException as e:
+        print(e)
+        logging.error(f"Erreur de connexion au serveur : {e}")
+        return False
+
 
 class SensorManager:
     def __init__(self, _data_sender):
@@ -41,19 +60,20 @@ class SensorManager:
         self.sensors.append((sensor, _interval))
         self.next_send_time[sensor] = time.time()
 
-    def add_dht22(self, _pin, _interval):
-        _dht22 = DHT22Sensor(_pin)
-        self.add_sensor(_dht22, _interval)
-
     def collect_data(self):
+        # while True:
+        #     check = ping()
+        # if check :
         current_time = time.time()
         logging.info("Collecting data...")
-        print(len(self.sensors))
         for sensor, interval in self.sensors:
             if current_time > self.next_send_time[sensor]:
                 self._data_sender.send_data(sensor)
                 logging.info(f"Sent data for {sensor}")
                 self.next_send_time[sensor] = current_time + interval
         logging.info("Data collected.")
+            # break
+
+
 
 

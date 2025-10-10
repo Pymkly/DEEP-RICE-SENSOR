@@ -1,4 +1,4 @@
-from typing import List
+import logging
 
 from fastapi import APIRouter, Request
 
@@ -13,10 +13,10 @@ manager = IncomingManager()
 @router.get("/")
 async def receive_data(request: Request):
     params = dict(request.query_params)
-    print(params)
+    logging.info(params)
     mac = params.pop("mac", None)
     ref = get_ref_from_mac(mac)
-    print(ref)
+    logging.info(ref)
     # print(ref)
     if ref is None:
         on_mac_unknown(mac)

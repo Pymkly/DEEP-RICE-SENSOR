@@ -20,7 +20,7 @@ class DataSender:
             for i in range(len(datas)):
                 data = datas[i]
                 # data["ref"] = get_ref()
-                print(data)
+                logging.info(data)
                 response = requests.post(
                     self._server_url,
                     data=json.dumps(data),
